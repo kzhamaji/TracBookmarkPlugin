@@ -16,7 +16,9 @@ setup(
     version='0.1',
     packages=['tracbookmark'],
     package_data={'tracbookmark' : [
-        'templates/*.html', 'htdocs/*.*', 'htdocs/js/*.js', 'htdocs/css/*.css']},
+        'templates/*.html', 'htdocs/*.*', 'htdocs/js/*.js', 'htdocs/css/*.css',
+        'locale/*/LC_MESSAGES/*.mo',
+    ]},
     exclude_package_data={'': ['tests/*']},
     test_suite = 'tracbookmark.tests.suite',
     author='Yoshiyuki Sugimoto',
@@ -26,4 +28,7 @@ setup(
     url='http://trac-hacks.org/wiki/BookmarkPlugin',
     description='A plugin bookmark Trac resources.',
     entry_points = {'trac.plugins': ['tracbookmark = tracbookmark']},
+    message_extractors={'tracbookmark' : [
+        ('**.py', 'python', None),
+        ('templates/**.html', 'genshi', None),]},
     )

@@ -26,6 +26,10 @@ from trac.web.api import IRequestFilter, IRequestHandler
 from trac.web.chrome import (
     ITemplateProvider, add_ctxtnav, add_notice, add_script, add_stylesheet
 )
+
+from trac.util.translation import domain_functions
+_, add_domain = domain_functions('tracbookmark', ('_', 'add_domain'))
+
 try:
     from trac.web.api import arg_list_to_args, parse_arg_list
 except ImportError:
@@ -53,6 +57,16 @@ class BookmarkSystem(Component):
     bookmark_path = re.compile(r'/bookmark')
     path_match = re.compile(r'/bookmark/(add|delete|delete_in_page)/(.*)')
     nonbookmarkable_actions = ('copy', 'delete', 'edit', 'new', 'rename')
+
+    def __init__ (self):
+        import pkg_resources
+        try:
+            locale_dir = pkg_resources.resource_filename(__name__, 'locale')
+        except KeyError:
+            pass
+        else:
+            add_domain(self.env.path, locale_dir)
+
 
     ### public methods
 
@@ -134,7 +148,7 @@ class BookmarkSystem(Component):
                     content = '&'.join((
                         'on',
                         req.href.bookmark('delete', resource),
-                        'Delete bookmark'))
+                        _('Delete bookmark')))
                     if isinstance(content, unicode):
                         content = content.encode('utf-8')
                     req.send(content)
@@ -146,14 +160,14 @@ class BookmarkSystem(Component):
                 self.delete_bookmark(req, resource)
 
                 if action == 'delete_in_page':
-                    add_notice(req, 'Bookmark is deleted.')
+                    add_notice(req, _('Bookmark is deleted.'))
                     req.redirect(req.href.bookmark())
 
                 if self._is_ajax(req):
                     content = '&'.join((
                         'off',
                         req.href.bookmark('add', resource),
-                        'Bookmark this page'))
+                        _('Bookmark this page')))
                     if isinstance(content, unicode):
                         content = content.encode('utf-8')
                     req.send(content)
@@ -163,7 +177,7 @@ class BookmarkSystem(Component):
         # listing bookmarks
         if self._is_ajax(req):
             menu = self._get_bookmarks_menu(req)
-            content = tag(tag.a('Bookmarks', href=req.href.bookmark()), menu)
+            content = tag(tag.a(_('Bookmarks'), href=req.href.bookmark()), menu)
             req.send(unicode(content).encode('utf-8'))
 
         bookmarks = [self._format_name(req, url)
@@ -320,11 +334,11 @@ class BookmarkSystem(Component):
 
         if bookmark:
             class_ = 'bookmark_on'
-            title = 'Delete Bookmark'
+            title = _('Delete Bookmark')
             href = req.href.bookmark('delete', resource)
         else:
             class_ = 'bookmark_off'
-            title = 'Bookmark this page'
+            title = _('Bookmark this page')
             href = req.href.bookmark('add', resource)
         anchor = tag.a(u'\u200b', id='bookmark_this', class_=class_,
                        title=title, href=href, data_list=req.href.bookmark())
@@ -334,7 +348,7 @@ class BookmarkSystem(Component):
         add_stylesheet(req, 'bookmark/css/tracbookmark.css')
 
         menu = self._get_bookmarks_menu(req)
-        item = tag.span(tag.a('Bookmarks', href=req.href.bookmark()),
+        item = tag.span(tag.a(_('Bookmarks'), href=req.href.bookmark()),
                         menu, id='bookmark_menu')
         add_ctxtnav(req, item)
 

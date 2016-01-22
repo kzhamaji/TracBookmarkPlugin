@@ -1,0 +1,50 @@
+# Japanese (Japan) translations for TracBookmark.
+# Copyright (C) 2016 ORGANIZATION
+# This file is distributed under the same license as the TracBookmark
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TracBookmark 0.1\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2016-01-21 23:30+0900\n"
+"PO-Revision-Date: 2016-01-21 23:14+0900\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja_JP\n"
+"Language-Team: ja_JP <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.2.0\n"
+
+#: tracbookmark/__init__.py:151
+msgid "Delete bookmark"
+msgstr "ブックマークから削除"
+
+#: tracbookmark/__init__.py:163
+msgid "Bookmark is deleted."
+msgstr "ブックマークを削除しました。"
+
+#: tracbookmark/__init__.py:170 tracbookmark/__init__.py:341
+msgid "Bookmark this page"
+msgstr "このページをブックマーク"
+
+#: tracbookmark/__init__.py:180 tracbookmark/__init__.py:351
+#: tracbookmark/templates/bookmark_list.html:6
+msgid "Bookmarks"
+msgstr "ブックマーク"
+
+#: tracbookmark/__init__.py:337
+msgid "Delete Bookmark"
+msgstr "ブックマークから削除"
+
+#: tracbookmark/templates/bookmark_list.html:9
+msgid "Your bookmarks"
+msgstr "あなたのブックマーク"
+
+#: tracbookmark/templates/bookmark_list.html:14
+msgid "delete"
+msgstr "削除"
+
