@@ -11,6 +11,24 @@
 
 from setuptools import setup
 
+extra = {}
+
+try:
+    from trac.util.dist  import  get_l10n_cmdclass
+    cmdclass = get_l10n_cmdclass()
+    if cmdclass:
+        extra['cmdclass'] = cmdclass
+        extractors = [
+            ('**.py',                'python', None),
+            ('**/templates/**.html', 'genshi', None),
+        ]
+        extra['message_extractors'] = {
+            'tractags': extractors,
+        }
+# i18n is implemented to be optional here
+except ImportError:
+    pass
+
 setup(
     name='TracBookmark',
     version='0.1',
@@ -28,7 +46,5 @@ setup(
     url='http://trac-hacks.org/wiki/BookmarkPlugin',
     description='A plugin bookmark Trac resources.',
     entry_points = {'trac.plugins': ['tracbookmark = tracbookmark']},
-    message_extractors={'tracbookmark' : [
-        ('**.py', 'python', None),
-        ('templates/**.html', 'genshi', None),]},
+    **extra
     )
