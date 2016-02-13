@@ -39,6 +39,8 @@ try:
 except ImportError:
     from compat import resource_exists
 
+from trac.versioncontrol.api import NoSuchChangeset, RepositoryManager
+
 
 class BookmarkSystem(Component):
     """Bookmark Trac resources."""
@@ -272,8 +274,10 @@ class BookmarkSystem(Component):
                     linkname = "[%s]" % rev
                     name = get_resource_description(self.env, resource)
                 elif realm == 'browser':
-                    parent = Resource('source', path[1])
-                    resource = Resource('source', '/'.join(path[2:]), False, parent)
+		    rm = RepositoryManager(self.env)
+		    reponame, repos, path = rm.get_repository_by_path('/'.join(path[1:]))
+                    parent = Resource('source', reponame)
+                    resource = Resource('source', path, False, parent)
                     linkname = get_resource_description(self.env, resource)
                     name = get_resource_summary(self.env, resource)
                 elif realm == 'attachment':
