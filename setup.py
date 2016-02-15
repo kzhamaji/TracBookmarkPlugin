@@ -23,7 +23,7 @@ try:
             ('**/templates/**.html', 'genshi', None),
         ]
         extra['message_extractors'] = {
-            'tractags': extractors,
+            'tracbookmark': extractors,
         }
 # i18n is implemented to be optional here
 except ImportError:
