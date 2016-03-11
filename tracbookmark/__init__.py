@@ -359,7 +359,7 @@ class BookmarkSystem(Component):
         add_ctxtnav(req, item)
 
     def _get_bookmarks_menu(self, req):
-        menu = tag.ul()
+        menu = tag.ul(class_='bookmarks')
         for url, name, username in self.get_bookmarks(req):
             params = self._format_name(req, url)
             if params['name']:
@@ -368,7 +368,7 @@ class BookmarkSystem(Component):
                 label = params['linkname']
             if params['href'] is not None:
                 anchor = tag.a(label, href=params['href'], title=label)
-                menu.append(tag.li(anchor))
+                menu.append(tag.li(anchor, class_=params['class_']))
         return menu
 
     def _get_resource_uri(self, req):
