@@ -182,6 +182,8 @@ class BookmarkSystem(Component):
             content = tag(tag.a(_('Bookmarks'), href=req.href.bookmark()), menu)
             req.send(unicode(content).encode('utf-8'))
 
+        add_stylesheet(req, 'bookmark/css/tracbookmark.css')
+
         bookmarks = [self._format_name(req, url)
                      for url, name, username in self.get_bookmarks(req)]
         return 'bookmark_list.html', {'bookmarks': bookmarks}, None
