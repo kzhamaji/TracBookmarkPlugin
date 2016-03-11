@@ -55,8 +55,14 @@ ul.bookmarks li.wiki {
     background-image: url(../../common/wiki.png);
 }
 ul.bookmarks li.report,
-ul.bookmarks li.ticket {
+ul.bookmarks li.ticket.new {
     background-image: url(../../common/newticket.png);
+}
+ul.bookmarks li.ticket {
+    background-image: url(../../common/editedticket.png);
+}
+ul.bookmarks li.ticket.closed {
+    background-image: url(../../common/closedticket.png);
 }
 ul.bookmarks li.browser,
 ul.bookmarks li.changeset {
